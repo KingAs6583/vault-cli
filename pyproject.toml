@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vault"
+version = "0.1.0"
+description = "Secure zero-knowledge vault CLI"
+requires-python = ">=3.10"
+
+dependencies = [
+    "cryptography>=42.0.0",
+    "click>=8.1.7"
+]
+
+[project.scripts]
+vault = "vault.cli:cli"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
