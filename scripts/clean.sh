@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo "🧹 Cleaning project..."
+echo "Cleaning project..."
 
 rm -rf \
   build \
@@ -12,7 +12,7 @@ rm -rf \
 
 find . -type d -name "__pycache__" -exec rm -rf {} +
 
-echo "✅ Clean complete."
+echo "Clean complete."
 
 # Ensure scripts are executable in a cross-platform manner - no-op on Windows
 chmod +x scripts/*.sh 2>/dev/null || true

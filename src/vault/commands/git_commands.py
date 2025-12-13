@@ -3,8 +3,13 @@ from pathlib import Path
 
 import click
 
-from vault.config import (get_backup_dir, get_db_path, get_git_repo_path,
-                          require_setup, set_config)
+from vault.config import (
+    get_backup_dir,
+    get_db_path,
+    get_git_repo_path,
+    require_setup,
+    set_config,
+)
 from vault.crypto.utils import prompt_password
 from vault.storage.backup import backup_db, encrypt_backup
 

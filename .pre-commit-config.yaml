@@ -16,18 +16,18 @@ repos:
         args: [--fix]
         stages: [commit]
 
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: main
-    hooks:
-      - id: isort
-        stages: [commit]
+  # - repo: https://github.com/pre-commit/mirrors-isort
+  #   rev: main
+  #   hooks:
+  #     - id: isort
+  #       stages: [commit]
 
-  - repo: https://github.com/psf/black
-    rev: main
-    hooks:
-      - id: black
-        args: [--line-length=120]
-        stages: [commit]
+  # - repo: https://github.com/psf/black
+  #   rev: main
+  #   hooks:
+  #     - id: black
+  #       args: [--line-length=120]
+  #       stages: [commit]
 
   - repo: local
     hooks:

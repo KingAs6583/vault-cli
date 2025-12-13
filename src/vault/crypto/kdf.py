@@ -1,8 +1,12 @@
 import os
 from hashlib import pbkdf2_hmac
 
-from vault.constants import (AES_KEY_LENGTH, KDF_ITERATIONS, KDF_SALT_LENGTH,
-                             MIN_PASSWORD_LENGTH)
+from vault.constants import (
+    AES_KEY_LENGTH,
+    KDF_ITERATIONS,
+    KDF_SALT_LENGTH,
+    MIN_PASSWORD_LENGTH,
+)
 from vault.exceptions import InvalidPasswordError
 
 """KDF helpers for deriving AES keys from passphrases.

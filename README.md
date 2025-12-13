@@ -191,6 +191,7 @@ To run the project's pre-commit hooks locally (the hooks run `scripts/clean.sh`,
 ```bash
 pip install -r requirements-dev.txt
 pre-commit install
+python -m pip install --upgrade pip setuptools wheel
 ```
 
 If you want to run the hooks manually against all files, use:

@@ -4,9 +4,9 @@ This module implements a tiny migrations framework: a `migrations` table records
 applied migration names and each migration is idempotent so it can be re-run
 against an existing DB.
 """
-from datetime import datetime, timezone
-import sqlite3
 
+import sqlite3
+from datetime import datetime, timezone
 
 MIGRATIONS = []
 

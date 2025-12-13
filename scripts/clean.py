@@ -3,11 +3,11 @@
 
 This script mirrors scripts/clean.sh but is cross-platform for use in pre-commit hooks.
 """
-import os
 import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+
 
 def remove_if_exists(path: Path):
     try:
@@ -19,8 +19,9 @@ def remove_if_exists(path: Path):
         # Ignore any permission or missing file errors
         pass
 
+
 def main():
-    print("🧹 Cleaning project (python)")
+    print("Cleaning project (python)")
     patterns = [
         ROOT / "build",
         ROOT / "dist",
@@ -39,7 +40,8 @@ def main():
     for spec in ROOT.glob("*.spec"):
         remove_if_exists(spec)
 
-    print("✅ Clean complete.")
+    print("Clean complete.")
+
 
 if __name__ == "__main__":
     main()

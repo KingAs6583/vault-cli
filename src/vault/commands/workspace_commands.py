@@ -1,12 +1,11 @@
+import os
 import platform
 import subprocess
-import os
 from pathlib import Path
 
 import click
 
-from vault.config import (get_db_path, get_workspace_dir, require_setup,
-                          set_config)
+from vault.config import get_db_path, get_workspace_dir, require_setup, set_config
 from vault.crypto.utils import prompt_password
 from vault.storage.db import VaultDB
 

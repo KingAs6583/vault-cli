@@ -1,5 +1,5 @@
 import sqlite3
-from pathlib import Path
+
 from vault.storage.db import VaultDB
 
 
@@ -8,7 +8,8 @@ def test_migration_adds_filename_column(tmp_path):
     db_path = tmp_path / "old_vault.db"
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
-    cur.execute('''
+    cur.execute(
+        """
         CREATE TABLE secrets (
             project TEXT NOT NULL,
             environment TEXT NOT NULL,
@@ -21,7 +22,8 @@ def test_migration_adds_filename_column(tmp_path):
             is_file INTEGER NOT NULL,
             PRIMARY KEY(project, environment, key)
         )
-    ''')
+    """
+    )
     conn.commit()
     conn.close()
 
@@ -34,4 +36,4 @@ def test_migration_adds_filename_column(tmp_path):
     columns = {row[1] for row in cur.fetchall()}
     conn.close()
 
-    assert 'filename' in columns
+    assert "filename" in columns
