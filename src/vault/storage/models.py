@@ -7,7 +7,7 @@ class SecretRecord:
     project: str
     environment: str
     key: str
-    value: bytes           # encrypted bytes
+    value: bytes  # encrypted bytes
     iv: bytes
     salt: bytes
     created_at: datetime

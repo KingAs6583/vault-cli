@@ -5,7 +5,7 @@ from vault.exceptions import InvalidPasswordError
 
 
 def prompt_password(confirm: bool = False) -> str:
-    """ Prompt the user for a password securely.
+    """Prompt the user for a password securely.
     Args:
         confirm (bool): If True, prompt for password confirmation.
     Returns:

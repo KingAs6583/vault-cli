@@ -1,7 +1,8 @@
 import os
+
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-from vault.constants import AES_KEY_LENGTH, AES_GCM_IV_LENGTH
+from vault.constants import AES_GCM_IV_LENGTH, AES_KEY_LENGTH
 from vault.exceptions import CryptoError
 
 
@@ -30,8 +31,12 @@ def decrypt(key: bytes, iv: bytes, ciphertext: bytes) -> bytes:
     if len(key) != AES_KEY_LENGTH:
         raise CryptoError("Invalid AES key length")
 
+    if len(iv) != AES_GCM_IV_LENGTH:
+        raise CryptoError("Invalid IV length")
+
     aesgcm = AESGCM(key)
     try:
         return aesgcm.decrypt(iv, ciphertext, None)
     except Exception as exc:
+        # Avoid leaking internal errors; present a redacted message.
         raise CryptoError("Decryption failed") from exc

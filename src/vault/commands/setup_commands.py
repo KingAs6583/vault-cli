@@ -1,8 +1,10 @@
-import click
+from datetime import datetime, timezone
 from pathlib import Path
+
+import click
+
+from vault.config import get_config_dir, is_initialized, save_config
 from vault.storage.db import VaultDB
-from vault.config import is_initialized, save_config, CONFIG_DIR
-from datetime import datetime
 
 
 def register_setup_commands(cli):
@@ -24,14 +26,20 @@ def register_setup_commands(cli):
         click.echo("Vault CLI - First Time Setup")
 
         # DB path
-        default_db = CONFIG_DIR
+        default_db = get_config_dir()
         use_default = click.confirm(
             f"Store vault DB at default location?\n  {default_db}",
             default=True,
         )
-        db_path = default_db if use_default else Path(
-            click.prompt("Directory to store vault DB",
-                          type=click.Path(file_okay=False, dir_okay=True))
+        db_path = (
+            default_db
+            if use_default
+            else Path(
+                click.prompt(
+                    "Directory to store vault DB",
+                    type=click.Path(file_okay=False, dir_okay=True),
+                )
+            )
         )
         db_path = db_path / "vault.db"
 
@@ -39,7 +47,7 @@ def register_setup_commands(cli):
         backup_dir = Path(
             click.prompt(
                 "Backup directory",
-                default=str(CONFIG_DIR / "backups"),
+                default=str(get_config_dir() / "backups"),
             )
         )
 
@@ -53,16 +61,14 @@ def register_setup_commands(cli):
             workspace_dir = Path(
                 click.prompt(
                     "Workspace directory",
-                    default=str(CONFIG_DIR / "workspace"),
+                    default=str(get_config_dir() / "workspace"),
                 )
             )
 
         # Git repo (optional)
         git_repo = None
         if click.confirm("Use Git repo for encrypted backups?", default=False):
-            git_repo = Path(
-                click.prompt("Path to local Git repo")
-            )
+            git_repo = Path(click.prompt("Path to local Git repo"))
 
         # Create directories
         db_path.parent.mkdir(parents=True, exist_ok=True)
@@ -77,12 +83,14 @@ def register_setup_commands(cli):
         VaultDB(str(db_path))
         click.echo("Initialized vault database.")
 
-        save_config({
-            "vault_db_path": str(db_path),
-            "backup_dir": str(backup_dir),
-            "workspace_dir": str(workspace_dir) if workspace_dir else None,
-            "git_repo_path": str(git_repo) if git_repo else None,
-            "created_at": datetime.utcnow().isoformat(),
-        })
+        save_config(
+            {
+                "vault_db_path": str(db_path),
+                "backup_dir": str(backup_dir),
+                "workspace_dir": str(workspace_dir) if workspace_dir else None,
+                "git_repo_path": str(git_repo) if git_repo else None,
+                "created_at": datetime.now(timezone.utc).isoformat(),
+            }
+        )
 
         click.echo("Vault initialized successfully")

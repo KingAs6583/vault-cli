@@ -1,7 +1,9 @@
-from click.testing import CliRunner
-from vault.cli import cli
-from pathlib import Path
 import json
+from pathlib import Path
+
+from click.testing import CliRunner
+
+from vault.cli import cli
 
 
 def test_vault_setup_creates_config_and_db(tmp_path, monkeypatch):
@@ -9,8 +11,9 @@ def test_vault_setup_creates_config_and_db(tmp_path, monkeypatch):
 
     # Redirect HOME to temp
     monkeypatch.setenv("HOME", str(tmp_path))
+    monkeypatch.setenv("VAULT_CONFIG_DIR", str(tmp_path / ".vault-cli"))
 
-    result = runner.invoke(cli, ["setup"])
+    result = runner.invoke(cli, ["setup"], input="\n\n\n\n")
     assert result.exit_code == 0
 
     config_path = tmp_path / ".vault-cli" / "config.json"

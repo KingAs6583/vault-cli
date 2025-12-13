@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vault"
-version = "0.1.0"
+version = "0.2.0"
 description = "Secure zero-knowledge vault CLI"
 requires-python = ">=3.10"
 

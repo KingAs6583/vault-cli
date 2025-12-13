@@ -1,0 +1,35 @@
+# ----------------------------
+# Formatting & Linting
+# isort src
+# ruff check src --fix
+# black src
+# ----------------------------
+black>=24.4.2
+isort>=7.0.0
+ruff>=0.14.5
+
+# ----------------------------
+# Testing
+# ----------------------------
+pytest>=8.2.0
+pytest-cov>=5.0.0
+
+# ----------------------------
+# Git hooks
+# ----------------------------
+pre-commit>=3.7.0
+
+# Optional: pre-commit hooks require pre-commit to be installed in your
+# development environment. To install and enable the hooks:
+#   pip install -r requirements-dev.txt
+#   pre-commit install
+
+# ----------------------------
+# Build / Distribution
+# ----------------------------
+pyinstaller>=6.8.0
+
+# ----------------------------
+# Optional (Quality of life)
+# ----------------------------
+# pip-tools>=7.4.0

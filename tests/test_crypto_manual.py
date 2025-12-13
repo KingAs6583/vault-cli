@@ -1,5 +1,5 @@
-from vault.crypto.kdf import generate_salt, derive_key
-from vault.crypto.aes import encrypt, decrypt
+from vault.crypto.aes import decrypt, encrypt
+from vault.crypto.kdf import derive_key, generate_salt
 
 password = "StrongPassword123!"
 salt = generate_salt()

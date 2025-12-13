@@ -1,8 +1,12 @@
-import click
 from pathlib import Path
+
+import click
+
+from vault.config import get_backup_dir, get_db_path, require_setup
 from vault.crypto.utils import prompt_password
-from vault.storage.backup import backup_db, encrypt_backup, decrypt_backup as decrypt_backup_fn
-from vault.config import get_db_path, require_setup
+from vault.storage.backup import backup_db
+from vault.storage.backup import decrypt_backup as decrypt_backup_fn
+from vault.storage.backup import encrypt_backup
 
 
 def register_backup_commands(cli):
@@ -16,7 +20,7 @@ def register_backup_commands(cli):
             vault backup
         """
         require_setup()
-        path = backup_db(get_db_path())
+        path = backup_db(get_db_path(), backup_dir=get_backup_dir())
         click.echo(f"Backup created at {path}")
 
     @cli.command("backup_encrypt")
@@ -29,7 +33,7 @@ def register_backup_commands(cli):
         """
         require_setup()
         password = prompt_password()
-        path = backup_db(get_db_path())
+        path = backup_db(get_db_path(), backup_dir=get_backup_dir())
         encrypted = encrypt_backup(path, password)
         click.echo(f"Encrypted backup created at {encrypted}")
 
@@ -51,10 +55,9 @@ def register_backup_commands(cli):
 
         # Restore to original extension if possible
         orig_ext = Path(encrypted_file).stem.split(".")[-1] or ".db"
-        decrypted_path = (
-            Path(output_dir) / Path(encrypted_file).stem.replace(".enc", "." + orig_ext)
-            if output_dir
-            else Path(encrypted_file).with_suffix("." + orig_ext)
+        dest_dir = Path(output_dir) if output_dir else Path(get_backup_dir())
+        decrypted_path = dest_dir / Path(encrypted_file).stem.replace(
+            ".enc", "." + orig_ext
         )
         decrypted_file.rename(decrypted_path)
         click.echo(f"Decrypted backup written to: {decrypted_path}")

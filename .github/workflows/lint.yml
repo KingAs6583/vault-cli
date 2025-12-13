@@ -1,0 +1,28 @@
+name: Lint
+
+on:
+  workflow_dispatch: {}
+
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install linters
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff black
+
+      - name: Run ruff
+        run: ruff --select E,W,F --max-line-length 120
+
+      - name: Run black check
+        run: black --check .

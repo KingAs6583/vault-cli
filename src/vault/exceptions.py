@@ -1,5 +1,6 @@
 # vault/exceptions.py
 
+
 class VaultError(Exception):
     """Base exception for vault-related errors."""
 
