@@ -1,7 +1,7 @@
 # Vault CLI 🔐
 
-[![CI Tests](https://github.com/kinga/vault-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/kinga/vault-cli/actions/workflows/ci.yml)
-[![Lint](https://github.com/kinga/vault-cli/actions/workflows/lint.yml/badge.svg)](https://github.com/kinga/vault-cli/actions/workflows/lint.yml)
+[![CI Tests](https://github.com/KingAs6583/vault-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/kinga/vault-cli/actions/workflows/ci.yml)
+[![Lint](https://github.com/KingAs6583/vault-cli/actions/workflows/lint.yml/badge.svg)](https://github.com/kinga/vault-cli/actions/workflows/lint.yml)
 
 A secure, user-friendly CLI for encrypting and storing local secrets and files using an encrypted SQLite vault.
 
