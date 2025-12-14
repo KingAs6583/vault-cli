@@ -33,11 +33,13 @@ def register_workspace_commands(cli):
                 workspace_dir = get_workspace_dir()
             else:
                 raise click.ClickException(
-                    "Workspace not configured; use `vault setup` or `vault config set workspace_dir <path>` to configure it."
+                    "Workspace not configured; use `vault setup` or "
+                    "`vault config set workspace_dir <path>` to configure it."
                 )
         if not workspace_dir:
             raise click.ClickException(
-                "Workspace not configured; use `vault setup` or `vault config set workspace_dir <path>` to configure it."
+                "Workspace not configured; use `vault setup` or "
+                "`vault config set workspace_dir <path>` to configure it."
             )
         p = Path(workspace_dir).resolve()
         p.mkdir(parents=True, exist_ok=True)
@@ -68,7 +70,8 @@ def register_workspace_commands(cli):
         workspace_dir = get_workspace_dir()
         if not workspace_dir:
             raise click.ClickException(
-                "Workspace not configured; use `vault setup` or `vault config set workspace_dir <path>` to configure it."
+                "Workspace not configured; use `vault setup` or "
+                "`vault config set workspace_dir <path>` to configure it."
             )
         # Ensure workspace directory exists
         Path(workspace_dir).mkdir(parents=True, exist_ok=True)

@@ -74,7 +74,8 @@ def register_file_commands(cli):
                     workspace_dir = get_workspace_dir()
                 else:
                     raise click.ClickException(
-                        "Workspace not configured; run `vault setup` or `vault config set workspace_dir <path>` to configure it."
+                        "Workspace not configured; run `vault setup` or "
+                        "`vault config set workspace_dir <path>` to configure it."
                     )
             if workspace_dir:
                 Path(workspace_dir).mkdir(parents=True, exist_ok=True)
