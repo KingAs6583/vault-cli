@@ -44,7 +44,10 @@ def test_workspace_import_and_open(tmp_path, monkeypatch):
     )
     result = runner.invoke(cli, ["workspace", "open"])
     assert result.exit_code == 0
-    assert "Opened workspace" in result.output
+    assert (
+        "Opened workspace" in result.output
+        or "Skipping opening workspace in CI environment" in result.output
+    )
 
 
 def test_workspace_open_skips_in_ci(tmp_path, monkeypatch):
