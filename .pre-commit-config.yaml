@@ -1,4 +1,4 @@
-# Pre-commit hooks to run clean, linters, formatters and tests on commit
+# Pre-commit hooks: clean → lint/format → test
 repos:
   - repo: local
     hooks:
@@ -7,27 +7,15 @@ repos:
         entry: python scripts/clean.py
         language: system
         pass_filenames: false
-        stages: [commit]
+        stages: [pre-commit]
 
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: main
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.4.10
     hooks:
       - id: ruff
+        name: Ruff (lint + format)
         args: [--fix]
-        stages: [commit]
-
-  # - repo: https://github.com/pre-commit/mirrors-isort
-  #   rev: main
-  #   hooks:
-  #     - id: isort
-  #       stages: [commit]
-
-  # - repo: https://github.com/psf/black
-  #   rev: main
-  #   hooks:
-  #     - id: black
-  #       args: [--line-length=120]
-  #       stages: [commit]
+        stages: [pre-commit]
 
   - repo: local
     hooks:
@@ -36,7 +24,7 @@ repos:
         entry: python -m pytest -q
         language: system
         pass_filenames: false
-        stages: [commit]
+        stages: [pre-commit]
 
   - repo: local
     hooks:
